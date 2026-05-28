@@ -149,12 +149,18 @@ python evaluation/run_eval.py
 ### Backend → Render
 
 1. Push repo to GitHub
-2. Go to [dashboard.render.com](https://dashboard.render.com) → **New+** → **Blueprint**
-3. Connect your repository — Render reads `render.yaml` from root automatically
-4. Set environment variables in Render dashboard:
+2. Go to [dashboard.render.com](https://dashboard.render.com) → **New+** → **Web Service**
+3. Connect your repository → select the repo
+4. Fill in:
+   - **Runtime:** `Python 3`
+   - **Root Directory:** `backend`
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - **Instance Type:** `Free`
+5. Set environment variables:
    - `GROQ_API_KEY` → your Groq key
-   - `FRONTEND_URL` → your Vercel URL (set after frontend deploy)
-5. Deploy
+   - `FRONTEND_URL` → your Vercel URL (update after frontend deploy)
+6. Click **Create Web Service** — first build takes ~5–10 min
 
 > **Note:** `backend/data/embeddings.npy` must be committed to Git.  
 > If it exceeds GitHub's 100MB limit, use [Git LFS](https://git-lfs.com):
@@ -163,6 +169,7 @@ python evaluation/run_eval.py
 > git lfs track "*.npy"
 > git add .gitattributes
 > ```
+> After deploy, hit `https://your-app.onrender.com/health` once to warm up the index.
 
 ### Frontend → Vercel
 
