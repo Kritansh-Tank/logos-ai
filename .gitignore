@@ -1,0 +1,49 @@
+# Git ignore for Logos AI — Christian Scripture Assistant
+
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+
+# ── Env files ────────────────────────────────────────
+.env
+backend/.env
+!backend/.env.example
+!frontend/.env.local
+
+# ── Test / scratch ────────────────────────────────────
+test_retrieval.py
+
+# ── Next.js ──────────────────────────────────────────
+frontend/.next/
+frontend/node_modules/
+frontend/.vercel/
+frontend/out/
+
+# ── OS ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs ─────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# NOTE: backend/data/embeddings.npy and metadata.json
+# are intentionally NOT ignored — they must be committed.
+# If embeddings.npy > 100MB, use Git LFS:
+#   git lfs install && git lfs track "*.npy"

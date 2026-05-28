@@ -1,0 +1,20 @@
+# render.yaml — Render Blueprint (Infrastructure as Code)
+# Place this file at the ROOT of your Git repository.
+# Connect via: Render Dashboard → New+ → Blueprint → select your repo
+
+services:
+  - type: web
+    name: christian-ai-backend
+    runtime: python          # correct field (not "env: python")
+    region: oregon           # options: oregon, frankfurt, singapore, ohio
+    plan: free
+    rootDir: backend         # monorepo: tells Render the Python app is in /backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health # Render pings GET /health to verify the service is up
+
+    envVars:
+      - key: GROQ_API_KEY    # set manually in Render dashboard after deploy
+      - key: FRONTEND_URL    # set to your Vercel URL after frontend deploy
+      - key: PYTHON_VERSION
+        value: "3.11"
