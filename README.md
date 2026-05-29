@@ -216,4 +216,4 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for full engineering decisions.
 
 ## License
 
-MIT License - See LICENSE file for details
+MIT License - See [LICENSE](./LICENSE.md) file for details
