@@ -31,7 +31,7 @@
 | Layer | Technology |
 |---|---|
 | LLM | Groq `llama-3.3-70b-versatile` (free) |
-| Embeddings | `sentence-transformers/all-MiniLM-L6-v2` (local) |
+| Embeddings | `fastembed` + `all-MiniLM-L6-v2` ONNX (no PyTorch, ~50MB RAM) |
 | Vector Search | Pre-built NumPy index (31,102 KJV verses, 47.8 MB) |
 | Image Generation | `pollinations.ai` (free, no key) |
 | Backend | FastAPI + SSE streaming → Render |
@@ -210,7 +210,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for full engineering decisions.
 - Rotate the Groq API key periodically
 - The `embeddings.npy` file is read-only at runtime — safe to commit
 - Image generation uses 4 safety layers — but AI-generated images carry no absolute guarantee; treat as moderated, not certified
-- The cosine similarity biblical relevance check (`threshold=0.22`) uses the same `all-MiniLM-L6-v2` model as RAG — zero extra memory or latency cost
+- The cosine similarity biblical relevance check (`threshold=0.22`) reuses the same `fastembed` model already loaded for RAG — zero extra memory or latency cost
 
 ---
 

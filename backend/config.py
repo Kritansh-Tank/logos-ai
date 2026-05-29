@@ -9,7 +9,7 @@ FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
 # RAG settings
 TOP_K_PASSAGES = 5
-EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 # Paths — embeddings live in backend/data/ (built by rag/build_index.py)
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")

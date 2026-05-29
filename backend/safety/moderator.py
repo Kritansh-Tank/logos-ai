@@ -14,6 +14,7 @@ Returns: ModerationResult(allowed, reason, category, severity)
 """
 
 import re
+import numpy as np
 from dataclasses import dataclass
 
 # ---------------------------------------------------------------------------
@@ -182,7 +183,6 @@ def _get_christian_anchor():
     if _christian_anchor is not None:
         return _christian_anchor
     try:
-        import numpy as np
         from rag.retriever import retriever
         if not retriever._loaded:
             return None
@@ -192,7 +192,7 @@ def _get_christian_anchor():
             "Christian religious artwork Jesus Bible",
             "sacred Bible verse illustration holy",
         ]
-        vecs = retriever.model.encode(phrases, normalize_embeddings=True)
+        vecs = np.array(list(retriever.model.embed(phrases)), dtype=np.float32)
         anchor = np.mean(vecs, axis=0)
         anchor = anchor / np.linalg.norm(anchor)  # re-normalize after averaging
         _christian_anchor = anchor
@@ -219,7 +219,7 @@ def _has_biblical_relevance(prompt: str) -> bool:
         return False
     try:
         from rag.retriever import retriever
-        vec = retriever.model.encode(prompt, normalize_embeddings=True)
+        vec = np.array(list(retriever.model.embed([prompt]))[0], dtype=np.float32)
         similarity = float(vec @ anchor)
         return similarity >= BIBLICAL_SIMILARITY_THRESHOLD
     except Exception:

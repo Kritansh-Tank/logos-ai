@@ -13,7 +13,7 @@ Hybrid retrieval strategy:
 import re
 import json
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
 from config import EMBEDDINGS_PATH, METADATA_PATH, EMBEDDING_MODEL, TOP_K_PASSAGES
 
 _BOOK_NAMES = (
@@ -156,7 +156,7 @@ class ScriptureRetriever:
             v["reference"].lower(): i for i, v in enumerate(self.metadata)
         }
 
-        self.model = SentenceTransformer(EMBEDDING_MODEL)
+        self.model = TextEmbedding(model_name=EMBEDDING_MODEL)
         self._loaded = True
         print(f"[DONE] Scripture index ready -- {len(self.metadata):,} verses loaded")
 
@@ -216,11 +216,10 @@ class ScriptureRetriever:
         """
         Cosine similarity search. Skips indices already found by exact lookup.
         """
-        query_vec = self.model.encode(
-            [query],
-            normalize_embeddings=True,
-            convert_to_numpy=True
-        )[0].astype(np.float32)                              # (384,)
+        query_vec = np.array(
+            list(self.model.embed([query]))[0],
+            dtype=np.float32
+        )                                                    # (384,) already normalized
 
         scores = self.embeddings @ query_vec                 # (N,) dot product
         # Zero out already-included indices so they don't duplicate
