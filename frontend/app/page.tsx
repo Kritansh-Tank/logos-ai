@@ -466,15 +466,6 @@ export default function Home() {
                     <h2 className="font-cinzel" style={{ fontSize: "1.8rem", color: "var(--amber-800)", marginBottom: 10 }}>
                       Logos AI
                     </h2>
-                    <p
-                      className="font-lora"
-                      style={{ color: "var(--text-secondary)", fontSize: "1.05rem", maxWidth: 420, margin: "0 auto", fontStyle: "italic" }}
-                    >
-                      &ldquo;In the beginning was the Word, and the Word was with God, and the Word was God.&rdquo;
-                    </p>
-                    <p style={{ fontSize: "0.75rem", color: "var(--text-faint)", marginTop: 6 }}>
-                      — John 1:1 (KJV)
-                    </p>
                   </div>
 
                   <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", maxWidth: 380, lineHeight: 1.7 }}>
@@ -542,18 +533,19 @@ export default function Home() {
                       boxShadow: "0 8px 32px rgba(217,119,6,0.25)",
                     }}
                   >
-                    <ImageIcon size={28} color="#fff" strokeWidth={1.8} />
+                    <Cross size={28} color="#fff" strokeWidth={2} />
                   </div>
 
                   <div>
-                    <h2 className="font-cinzel" style={{ fontSize: "1.6rem", color: "var(--amber-800)", marginBottom: 8 }}>
-                      Biblical Image Generator
+                    <h2 className="font-cinzel" style={{ fontSize: "1.8rem", color: "var(--amber-800)", marginBottom: 10 }}>
+                      Logos AI
                     </h2>
-                    <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", maxWidth: 380, lineHeight: 1.7 }}>
-                      Describe a biblical scene or moment and generate Christian artwork.
-                      All prompts are moderated for safety.
-                    </p>
                   </div>
+
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", maxWidth: 500, lineHeight: 1.7 }}>
+                    Describe a biblical scene or moment and generate Christian artwork.<br />
+                    All prompts are moderated for safety.
+                  </p>
 
                   <div
                     style={{
@@ -645,7 +637,7 @@ export default function Home() {
                 marginTop: 8,
               }}
             >
-              Shift+Enter for new line · Answers grounded in 31,102 KJV verses
+              Shift+Enter for new line
             </p>
           </div>
         )}
@@ -707,7 +699,7 @@ export default function Home() {
                 marginTop: 8,
               }}
             >
-              Shift+Enter for new line · Prompts are moderated for safe Christian content
+              Shift+Enter for new line
             </p>
           </div>
         )}
