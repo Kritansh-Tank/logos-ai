@@ -10,7 +10,6 @@ import {
   Image as ImageIcon,
   Cross,
   BookOpen,
-  Wifi,
   WifiOff,
 } from "lucide-react";
 import ChatBubble, { Message, TypingIndicator } from "./components/ChatBubble";
